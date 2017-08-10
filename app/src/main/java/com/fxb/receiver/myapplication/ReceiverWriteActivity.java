@@ -59,8 +59,9 @@ public class ReceiverWriteActivity extends Activity implements IReceiverWriteVie
 
         presenter = new ReceiverWritePresenter(this);
 
-        onClick();
+        presenter.setEPCtext();
 
+        onClick();
 
     }
 
