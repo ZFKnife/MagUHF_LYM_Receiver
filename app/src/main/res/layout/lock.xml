@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+     <TextView
+        android:id="@+id/textEPC"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:hint="@string/Lable_EPC"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/readepc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Lable_Read"
+        android:textSize="20dp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Lock_PAWD" />
+
+        <EditText
+            android:id="@+id/Lockpassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/Lock_Code"
+            android:text="00000000"
+            android:textSize="18dp" />
+
+        <Button
+            android:id="@+id/BtnLock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Lock_TAG"
+            android:textSize="18dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textViewMem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Lable_Memory" />
+
+        <Spinner
+            android:id="@+id/spinnerMembank"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/textViewOprate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Lable_Action" />
+
+        <Spinner
+            android:id="@+id/spinnerAction"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Kill_Pswd_Title" />
+
+        <EditText
+            android:id="@+id/killpassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/Kill_Pswd"
+            android:text="00000000"
+            android:textSize="18dp" />
+
+        <Button
+            android:id="@+id/BtnKill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Kill_Tag"
+            android:textSize="18dp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+
+        <TextView
+            android:id="@+id/resultView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:textSize="18dp" />
+    </ScrollView>
+
+</LinearLayout>

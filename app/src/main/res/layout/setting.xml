@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textViewPower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Power_out" />
+
+        <EditText
+            android:id="@+id/power"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint=""
+            android:text=""
+            android:textSize="18dp" />
+
+        
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+        <Button
+            android:id="@+id/BtnReadPower"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Power_out_Read"
+            android:textSize="18dp" />
+
+        <Button
+            android:id="@+id/BtnSetPower"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Power_out_Setting"
+            android:textSize="18dp" />
+
+        <Button
+            android:id="@+id/BtnScanSigin"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Power_out_test"
+            android:textSize="18dp" />
+        
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textViewParameter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Receive_regulator_parameters" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textViewMixer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Mixer" />
+
+        <EditText
+            android:id="@+id/Mixer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint=""
+            android:text=""
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/textViewAMP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/IF_Amplifier" />
+
+        <EditText
+            android:id="@+id/AFAMP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint=""
+            android:text=""
+            android:textSize="18dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+         <TextView
+            android:id="@+id/textViewThrd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Demodulation_threshold" />
+
+        <EditText
+            android:id="@+id/Thrd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint=""
+            android:text=""
+            android:textSize="18dp" />       
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/BtnGetPam"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/Read"
+            android:textSize="18dp" />
+
+        <Button
+            android:id="@+id/BtnSetPam"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/Setting"
+            android:textSize="18dp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+
+        <TextView
+            android:id="@+id/resultView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:textSize="18dp" />
+    </ScrollView>
+
+</LinearLayout>

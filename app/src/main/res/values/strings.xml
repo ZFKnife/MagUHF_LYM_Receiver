@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">收货方</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="Setting">Setting</string>
+    <string name="EPC">EPC</string>
+    <string name="ReadWrite">Read Write</string>
+    <string name="Lockkill">Lock kill</string>
+    <string name="TEST">Test</string>
+    <string name="Version">Version</string>
+    <string name="Search">Search</string>
+    <string name="Readtid">Readtid</string>
+    <string name="Clean">Clean</string>
+    <string name="SearchLoop">SearchLoop</string>
+    <string name="TIDLoop">TIDLoop</string>
+    <string name="StopLoop">Stop loop</string>
+    <string name="Lable_NO">The Labels Field：0</string>
+    <string name="Lable_EPC">Tag EPC</string>
+    <string name="Lable_Read">Read The EPC</string>
+    <string name="Lock_PAWD">Lock code:</string>
+    <string name="Lock_Code">Lock code(HEX)00000000</string>
+    <string name="Lock_TAG">Lockout Tag</string>
+    <string name="Lable_Memory">Data Memory:</string>
+    <string name="Lable_Action">Action:</string>
+    <string name="Kill_Pswd">Kill password(HEX)00000000</string>
+    <string name="Kill_Pswd_Title">Kill password:</string>
+    <string name="Kill_Tag">Kill Tag</string>
+    <string name="Lable_Write">Tag Writer</string>
+    <string name="Lable_Read_Memory">Read the label</string>
+    <string name="Lable_Action_Area">Action area:</string>
+    <string name="Lable_Password">Password:</string>
+    <string name="Lable_start_address">Start address:</string>
+    <string name="Lable_Length">ReadLength:</string>
+    <string name="Lable_start_address_hint">Start address(word)0</string>
+    <string name="Lable_Length_hint">ReadLength(word)default 2, maximum 6</string>
+    <string name="Lable_data_write">Data ready to be written</string>
+    <string name="Lable_data">Data(HEX)</string>
+    <string name="Lable_result">Result:</string>
+    <string name="Power_out">Transmit Power:</string>
+    <string name="Power_out_Read">Read the transmit power</string>
+    <string name="Power_out_Setting">Set the transmit power</string>
+    <string name="Power_out_test">Test blocks signals</string>
+    <string name="Receive_regulator_parameters">Receive regulator parameters:</string>
+    <string name="Mixer">Mixer:</string>
+    <string name="IF_Amplifier">IF Amplifier:</string>
+    <string name="Demodulation_threshold">Demodulation threshold:</string>
+    <string name="Read">Read</string>
+    <string name="Time_Space">Time interval(in milliseconds)</string>
+    <string name="Start">Start</string>
+    <string name="Stop">Stop</string>
+    <string name="Fail">Fail:</string>
+    <string name="Success">Success:</string>
+    <string name="Total">Total :</string>
+    <string name="Failure_Rate">Failure Rate:</string>
+
+</resources>

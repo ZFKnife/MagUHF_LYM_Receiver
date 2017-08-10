@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">收货方</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="Setting">设置</string>
+    <string name="EPC">EPC</string>
+    <string name="ReadWrite">读和写</string>
+    <string name="Lockkill">锁定和销毁</string>
+    <string name="TEST">测试</string>
+    <string name="Version">版本</string>
+    <string name="Search">单次寻卡</string>
+    <string name="Readtid">单次读TID</string>
+    <string name="Clean">清除</string>
+    <string name="SearchLoop">连续寻卡</string>
+    <string name="TIDLoop">连续读TID</string>
+    <string name="StopLoop">停止</string>
+    <string name="Lable_NO">标签数量：0</string>
+    <string name="Lable_EPC">标签的epc</string>
+    <string name="Lable_Read">读取EPC</string>
+    <string name="Lock_PAWD">锁定密码：</string>
+    <string name="Lock_Code">锁定密码(HEX)默认00000000</string>
+    <string name="Lock_TAG">锁定标签</string>
+    <string name="Lable_Memory">数据存储区:</string>
+    <string name="Lable_Action">操作:</string>
+    <string name="Kill_Pswd">销毁密码(HEX)默认00000000</string>
+    <string name="Kill_Pswd_Title">销毁密码:</string>
+    <string name="Kill_Tag">销毁标签</string>
+    <string name="Lable_Write">写标签</string>
+    <string name="Lable_Read_Memory">读标签</string>
+    <string name="Lable_Action_Area">操作区域:</string>
+    <string name="Lable_Password">密码:</string>
+    <string name="Lable_start_address">起始地址:</string>
+    <string name="Lable_Length">读取长度:</string>
+    <string name="Lable_start_address_hint">起始地址(word)默认0</string>
+    <string name="Lable_Length_hint">数据长度(word)默认2,最大6</string>
+    <string name="Lable_data_write">写入数据</string>
+    <string name="Lable_data">写入数据(HEX)</string>
+    <string name="Lable_result">读取写入结果：</string>
+    <string name="Power_out">发射功率:</string>
+    <string name="Power_out_Read">读取发射功率</string>
+    <string name="Power_out_Setting">设置发射功率</string>
+    <string name="Power_out_test">测试阻塞信号</string>
+    <string name="Receive_regulator_parameters">接收调节器参数:</string>
+    <string name="Mixer">混频器:</string>
+    <string name="IF_Amplifier">中频放大器:</string>
+    <string name="Demodulation_threshold">信号解调阀值:</string>
+    <string name="Read">读取</string>
+    <string name="Time_Space">时间间隔(毫秒)</string>
+    <string name="Start">开始</string>
+    <string name="Stop">停止</string>
+    <string name="Fail">失败 :</string>
+    <string name="Success">成功 :</string>
+    <string name="Total">总数 :</string>
+    <string name="Failure_Rate">失败率 :</string>
+
+</resources>
