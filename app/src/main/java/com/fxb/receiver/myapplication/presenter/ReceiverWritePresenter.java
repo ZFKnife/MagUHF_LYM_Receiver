@@ -15,6 +15,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.fxb.receiver.myapplication.application.App;
 import com.fxb.receiver.myapplication.bean.Incidental;
+import com.fxb.receiver.myapplication.config.RequestConfig;
 import com.fxb.receiver.myapplication.util.Sp;
 import com.fxb.receiver.myapplication.util.Util;
 import com.fxb.receiver.myapplication.view.IReceiverWriteView;
@@ -133,8 +134,7 @@ public class ReceiverWritePresenter extends Presenter {
     }
 
     private void getIncidental() {
-        String url = "http://39.108.0.144/YJYNLogisticsSystem/appIncidental?action=getIncidental";
-        StringRequest getInidental = new StringRequest(url, new Response.Listener<String>() {
+        StringRequest getInidental = new StringRequest(RequestConfig.getIncidental, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
                 if (TextUtils.isEmpty(s)) {
@@ -175,8 +175,7 @@ public class ReceiverWritePresenter extends Presenter {
         if (strings == null) {
             return;
         }
-        String url = "http://39.108.0.144/YJYNLogisticsSystem/appPublishInformation?action=getRealordReceiver&";
-        StringBuilder stringBuilder = new StringBuilder(url);
+        StringBuilder stringBuilder = new StringBuilder(RequestConfig.getRealordReceiver);
         stringBuilder.append("&CARNUM=").append(carnum);
         StringRequest getContactRequest = new StringRequest(stringBuilder.toString(), new Response.Listener<String>() {
             @Override
@@ -255,8 +254,7 @@ public class ReceiverWritePresenter extends Presenter {
             * RECEIVERJING：收货端净重
             * INCIDENTAL：杂费信息
             * */
-        String url = "http://39.108.0.144/YJYNLogisticsSystem/appPublishInformation?action=uploadMeasData&";
-        StringBuilder stringBuilder = new StringBuilder(url);
+        StringBuilder stringBuilder = new StringBuilder(RequestConfig.upReceiverMeasData);
         stringBuilder.append("CARDNUM=").append(strings[0]);
         stringBuilder.append("&CARNUM=").append(carnum);
         stringBuilder.append("&RECEIVERMAO=").append(maoWeight);
@@ -280,8 +278,7 @@ public class ReceiverWritePresenter extends Presenter {
                                 @Override
                                 public void run() {
                                     //上传发货方图片
-                                    String uploadShipperurl = "";
-                                    uploadReceiverServer(uploadShipperurl, carnum, getBitmapPath(), imageBitmap);
+                                    uploadReceiverServer(RequestConfig.uploadReceiverurl, carnum, getBitmapPath(), imageBitmap);
                                 }
                             }).start();
                         }

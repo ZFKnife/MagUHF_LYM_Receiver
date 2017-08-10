@@ -14,6 +14,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.fxb.receiver.myapplication.application.App;
+import com.fxb.receiver.myapplication.config.RequestConfig;
 import com.fxb.receiver.myapplication.util.Sp;
 import com.fxb.receiver.myapplication.util.ToastUtil;
 
@@ -79,8 +80,7 @@ public class SelectReceiverActivity extends Activity {
     }
 
     public void getReceiver() {
-        String url = "http://39.108.0.144/YJYNLogisticsSystem/appPublishInformation?action=getReceiverList";
-        StringRequest getContactRequest = new StringRequest(url, new Response.Listener<String>() {
+        StringRequest getContactRequest = new StringRequest(RequestConfig.getReceiverList, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
                 if (TextUtils.isEmpty(s)) {
