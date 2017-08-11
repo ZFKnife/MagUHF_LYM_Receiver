@@ -1,4 +1,4 @@
-package print;
+package hardware.print;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

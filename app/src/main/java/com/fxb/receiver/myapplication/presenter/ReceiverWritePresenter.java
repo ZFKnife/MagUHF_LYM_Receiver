@@ -393,7 +393,6 @@ public class ReceiverWritePresenter extends Presenter {
 
         LinearLayout.LayoutParams vlp = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT);
         vlp.weight = 1;
-
         CheckBox checkBox = new CheckBox(App.mContext);
         checkBox.setLayoutParams(vlp);
         checkBox.setTextColor(Color.parseColor("#000000"));

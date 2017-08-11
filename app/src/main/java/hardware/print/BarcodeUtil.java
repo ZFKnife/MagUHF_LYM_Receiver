@@ -1,4 +1,7 @@
-package print;
+package hardware.print;
+
+import java.util.HashMap;
+import java.util.Hashtable;
 
 import android.app.ActionBar.LayoutParams;
 import android.content.Context;
@@ -18,15 +21,13 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
-import java.util.Hashtable;
-
 import static android.content.ContentValues.TAG;
 
 public final class BarcodeUtil {
 	private static final int BLACK = 0xff000000;
 	private static int PADDING_SIZE_MIN = 0;
 
-	public static Bitmap create2dBarcode(String str, BarcodeFormat barcodeFormat, int deswidth, int desheight)
+	public static Bitmap create2dBarcode(String str,BarcodeFormat barcodeFormat,int deswidth,int desheight)
 			throws WriterException {
 		Hashtable<EncodeHintType, String> hints = new Hashtable<EncodeHintType, String>();
 		hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
@@ -64,7 +65,7 @@ public final class BarcodeUtil {
 		return removeBlankFromBitmap(bitmap,startX,startY,width,height,deswidth,desheight);
 	}
 
-	private static Bitmap removeBlankFromBitmap(Bitmap bitmap, int startX, int startY, int width, int height, int deswidth, int desheight){
+	private static Bitmap removeBlankFromBitmap(Bitmap bitmap,int startX,int startY,int width,int height,int deswidth,int desheight){
 
 		if (true) {
 			// cat 2d barcode area
@@ -84,7 +85,7 @@ public final class BarcodeUtil {
 		return bitmap;
 	}
 
-	public static Bitmap create1dBarcode(String contents, BarcodeFormat barcodeFormat, int width, int height) throws WriterException {
+	public static Bitmap create1dBarcode(String contents,BarcodeFormat barcodeFormat,int width,int height) throws WriterException {
 		return encodeAsBitmap(contents,barcodeFormat,width,height);
 	}
 	 public static String guessAppropriateEncoding(CharSequence contents){
@@ -97,7 +98,7 @@ public final class BarcodeUtil {
 	  }
 
 	public static Bitmap encodeAsBitmap(String contents, BarcodeFormat format,
-                                        int desiredWidth, int desiredHeight) throws WriterException {
+			int desiredWidth, int desiredHeight) throws WriterException {
 
 		final int WHITE = 0xFFFFFFFF;
 		final int BLACK = 0xFF000000;
@@ -131,14 +132,14 @@ public final class BarcodeUtil {
 				}
 			}
 		}
-		Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+		Bitmap bitmap = Bitmap.createBitmap(width, height,Bitmap.Config.ARGB_8888);
 		bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
 		return removeBlankFromBitmap(bitmap,startX,startY,width,height,desiredWidth,desiredHeight);
 	}
 
 	public static Bitmap creatBarcode(Context context,
-                                      BarcodeFormat barcodeFormat, String contents, int desiredWidth,
-                                      int desiredHeight, boolean displayCode) throws WriterException {
+			BarcodeFormat barcodeFormat, String contents, int desiredWidth,
+			int desiredHeight, boolean displayCode) throws WriterException {
 		Bitmap ruseltBitmap = null;
 		/**
 		 * Image left and right blank
@@ -170,7 +171,7 @@ public final class BarcodeUtil {
 	 * @return
 	 */
 	protected static Bitmap creatCodeBitmap(String contents, int width,
-                                            int height, Context context) {
+			int height, Context context) {
 		TextView tv = new TextView(context);
 		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
@@ -196,7 +197,7 @@ public final class BarcodeUtil {
 	 * @return
 	 */
 	protected static Bitmap mixtureBitmap(Bitmap first, Bitmap second,
-                                          PointF fromPoint) {
+			PointF fromPoint) {
 		if (first == null || second == null || fromPoint == null) {
 			return null;
 		}
