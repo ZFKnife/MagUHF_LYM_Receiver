@@ -7,9 +7,10 @@ package com.fxb.receiver.myapplication.config;
 
 public class RequestConfig {
 
-    private static String ip = "39.108.0.144";
+    private static String ip = "139.224.0.153";
+//    private static String ip = "192.168.0.104";
 
-    private static String backPackage = "YJYNLogisticsSystem";
+    private static String backPackage = "LYMLogisticsSystem";
 
     private static String base = "http://" + ip + "/" + backPackage + "/";
 
@@ -17,13 +18,10 @@ public class RequestConfig {
 
     public static String getRealordReceiver = base + "appPublishInformation?action=getRealordReceiver&";
 
-    public static String uploadReceiverurl = base + "";
+    public static String uploadReceiverurl = base + "appUser/uploadReceiptorder";
 
     public static String getReceiverList = base + "appPublishInformation?action=getReceiverList";
 
     public static String getIncidental = base + "appIncidental?action=getIncidental";
-
-
-
 
 }

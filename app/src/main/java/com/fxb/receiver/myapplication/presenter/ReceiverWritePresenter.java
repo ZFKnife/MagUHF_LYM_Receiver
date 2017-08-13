@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -19,6 +20,8 @@ import com.fxb.receiver.myapplication.config.RequestConfig;
 import com.fxb.receiver.myapplication.util.Sp;
 import com.fxb.receiver.myapplication.util.Util;
 import com.fxb.receiver.myapplication.view.IReceiverWriteView;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,12 +31,16 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import hardware.print.BarcodeUtil;
+import hardware.print.printer;
 
 /**
  * Created by Administrator on 2017/8/9 0009.
@@ -73,11 +80,15 @@ public class ReceiverWritePresenter extends Presenter {
         }
     };
     private String carnum = null;
+    private String oradid = "";
+    private printer mPrinter = new printer();
+    private String cargo ="";
 
 
     public ReceiverWritePresenter(IReceiverWriteView iReceiverView) {
         super(iReceiverView);
         this.iReceiverView = iReceiverView;
+        mPrinter.Open();
         getIncidental();
     }
 
@@ -120,7 +131,11 @@ public class ReceiverWritePresenter extends Presenter {
         strings = str.split(",");
         iReceiverView.showToast("读取成功！");
         iReceiverView.setCarNumText(strings[1]);
-        carnum = URLEncoder.encode(strings[1].substring(0, 1)) + strings[1].substring(1);
+        try {
+            carnum = URLEncoder.encode(strings[1].substring(0, 1), "UTF-8") + strings[1].substring(1);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         iReceiverView.setShipperMaoText(strings[2]);
         iReceiverView.setShipperPiText(strings[3]);
         iReceiverView.setShipperJingText(strings[4]);
@@ -216,7 +231,7 @@ public class ReceiverWritePresenter extends Presenter {
     /*
     * 上传数据
     * */
-    private void uploadMeasData(String maoWeight, String piWeight, String jingWeight, final String sb) {
+    private void uploadMeasData(final String maoWeight, final String piWeight, String jingWeight, final String sb) {
         int c = CheckBoxs.size();
         final JSONArray ja = new JSONArray();
         for (int i = 0; i < c; i++) {
@@ -261,6 +276,7 @@ public class ReceiverWritePresenter extends Presenter {
         stringBuilder.append("&RECEIVERPI=").append(piWeight);
         stringBuilder.append("&RECEIVERJING=").append(jingWeight);
         stringBuilder.append("&INCIDENTAL=").append(ja);
+        Log.i("---- ", "uploadMeasData: " + stringBuilder.toString());
         StringRequest getContactRequest = new StringRequest(stringBuilder.toString(), new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
@@ -270,17 +286,29 @@ public class ReceiverWritePresenter extends Presenter {
                 }
                 try {
                     JSONObject o = new JSONObject(s);
-                    if (o.getString("status").equals("0")) {
-                        //上传成功后重新写卡
-                        writeTrue(sb);
+                    if (o.getString("Result").equals("0")) {
+                        JSONArray ja = new JSONArray(o.getString("data"));
+                        JSONObject jo = new JSONObject(String.valueOf(ja.getJSONObject(0)));
+                        oradid = jo.getString("ordered");
+                        cargo = jo.getString("name");
+                        //打印票据
+                        printe();
+                        StringBuilder sb2 = new StringBuilder();
+                        sb2.append(sb);
+                        sb2.append(cargo).append(",");
+                        sb2.append(maoWeight).append(",");
+                        sb2.append(piWeight).append(",");
+                        final String data = sb2.toString();
                         if (imageBitmap != null) {
                             new Thread(new Runnable() {
                                 @Override
                                 public void run() {
                                     //上传发货方图片
-                                    uploadReceiverServer(RequestConfig.uploadReceiverurl, carnum, getBitmapPath(), imageBitmap);
+                                    uploadReceiverServer(RequestConfig.uploadReceiverurl, carnum, getBitmapPath(), imageBitmap, data);
                                 }
                             }).start();
+                        } else {
+                            writeTrue(data);
                         }
                     }
                     iReceiverView.showToast(o.getString("msg"));
@@ -318,7 +346,7 @@ public class ReceiverWritePresenter extends Presenter {
      * @param bm
      * @return
      */
-    private boolean uploadReceiverServer(String targetUrl, String carnum, String fileName, Bitmap bm) {
+    private boolean uploadReceiverServer(String targetUrl, String carnum, String fileName, Bitmap bm, String sb) {
         String end = "\r\n";
         String twoHyphens = "--";
         String boundary = "******";
@@ -367,6 +395,7 @@ public class ReceiverWritePresenter extends Presenter {
                         iReceiverView.showToast("上传成功");
                     }
                 });
+                writeTrue(sb);
             }
             dos.close();
             is.close();
@@ -405,11 +434,112 @@ public class ReceiverWritePresenter extends Presenter {
         la.addView(textView);
         textView.setTextColor(Color.parseColor("#000000"));
         textView.setText("" + incidental.getMoney());
-        iReceiverView.getLinearLayout().addView(la);
         if (i == 1) {
             textView.setEnabled(false);
         }
         EditTexts.add(textView);
+        iReceiverView.getLinearLayout().addView(la);
+    }
+
+    public void printe() {
+        if (oradid.equals("")) {
+            iReceiverView.showToast("请先写卡");
+            return;
+        }
+        if (cargo.equals("")) {
+            iReceiverView.showToast("请先写卡");
+            return;
+        }
+        if (strings == null) {
+            iReceiverView.showToast("请先读卡");
+            return;
+        }
+        if (receiverMao == null) {
+            iReceiverView.showToast("请先读卡");
+            return;
+        }
+        if (receiverPI == null) {
+            iReceiverView.showToast("请先读卡");
+            return;
+        }
+        if (receiverJing == null) {
+            iReceiverView.showToast("请先读卡");
+            return;
+        }
+
+        mPrinter.PrintStringEx("卡的信息平台单据", 40, false, true, printer.PrintType.Centering);
+        mPrinter.PrintLineInit(20);
+        mPrinter.PrintLineString("收货方单据", 20, 210, false);
+        mPrinter.PrintLineEnd();
+        String str = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+        mPrinter.PrintLineInit(18);
+        mPrinter.PrintLineStringByType(str, 18, printer.PrintType.Centering, false);
+        mPrinter.PrintLineEnd();
+        mPrinter.PrintLineInit(25);
+        mPrinter.PrintLineStringByType("订单号：", 24, printer.PrintType.Left, true);
+        mPrinter.PrintLineString(oradid, 20, 200, false);
+        mPrinter.PrintLineEnd();
+        mPrinter.PrintLineInit(25);
+        mPrinter.PrintLineStringByType("发货方：", 24, printer.PrintType.Left, true);
+        mPrinter.PrintLineString(iReceiverView.getLocalhostName(), 20, 210, false);
+        mPrinter.PrintLineEnd();
+        mPrinter.PrintLineInit(25);
+        mPrinter.PrintLineStringByType("车牌号：", 24, printer.PrintType.Left, true);
+        mPrinter.PrintLineString(strings[1], 20, 200, false);
+        mPrinter.PrintLineEnd();
+        mPrinter.PrintLineInit(25);
+        mPrinter.PrintLineStringByType("货物名称：", 24, printer.PrintType.Left, true);
+        mPrinter.PrintLineString(cargo, 20, 210, false);
+        mPrinter.PrintLineEnd();
+        mPrinter.PrintLineInit(25);
+        mPrinter.PrintLineStringByType("毛重：", 24, printer.PrintType.Left, true);
+        mPrinter.PrintLineString(receiverMao, 20, 200, false);
+        mPrinter.PrintLineEnd();
+        mPrinter.PrintLineInit(25);
+        mPrinter.PrintLineStringByType("皮重：", 24, printer.PrintType.Left, true);
+        mPrinter.PrintLineString(receiverPI, 20, 200, false);
+        mPrinter.PrintLineEnd();
+        mPrinter.PrintLineInit(25);
+        mPrinter.PrintLineStringByType("净重：", 24, printer.PrintType.Left, true);
+        mPrinter.PrintLineString(receiverJing, 20, 200, false);
+        mPrinter.PrintLineEnd();
+        mPrinter.PrintLineInit(25);
+        mPrinter.PrintLineStringByType("打印时间：", 24, printer.PrintType.Left, true);
+        mPrinter.PrintLineString(Util.getTime(), 20, 200, false);
+        mPrinter.PrintLineEnd();
+        mPrinter.PrintLineInit(18);
+        mPrinter.PrintLineStringByType(str, 18, printer.PrintType.Centering, false);
+        mPrinter.PrintLineEnd();
+        Bitmap bm = null;
+        try {
+            bm = BarcodeUtil.encodeAsBitmap("Thanks for using our Android terminal",
+                    BarcodeFormat.QR_CODE, 160, 160);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+        if (bm != null) {
+            mPrinter.PrintBitmap(bm);
+        }
+        mPrinter.PrintLineInit(40);
+        mPrinter.PrintLineStringByType("", 24, printer.PrintType.Right, true);//160
+        mPrinter.PrintLineEnd();
+        mPrinter.printBlankLine(40);
+        clear();
+    }
+
+    private void clear() {
+        oradid = "";
+        strings = null;
+        cargo = "";
+        receiverMao = null;
+        receiverPI = null;
+        receiverJing = null;
+        abstractUHFModel.clear();
+        iReceiverView.setEPCtext("");
+        iReceiverView.setCarNumText("");
+        iReceiverView.setShipperJingText("");
+        iReceiverView.setShipperJingText("");
+        iReceiverView.showToast("数据写入完成，可进行下一业务操作！");
     }
 
     public void cancel() {

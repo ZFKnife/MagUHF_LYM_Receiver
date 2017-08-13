@@ -3,6 +3,7 @@ package com.fxb.receiver.myapplication;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -71,6 +72,7 @@ public class ReceiverWriteActivity extends Activity implements IReceiverWriteVie
             Bundle bundle = data.getExtras();
             Bitmap imageBitmap = (Bitmap) bundle.get("data");
             assert imageBitmap != null;
+            imageView.setBackgroundColor(Color.parseColor("#FFFFFF"));
             imageView.setImageBitmap(imageBitmap);
         }
     }
