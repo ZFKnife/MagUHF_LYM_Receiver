@@ -106,7 +106,7 @@ public abstract class Presenter {
     private void writeMore(String sb) throws UnsupportedEncodingException {
         String str = sb;
         while (str.length() < 32) {
-            str += "000000000000000000000000000000";
+            str += "0000000000000000000000000000000000000000000000000";
         }
         byte[] date = str.getBytes("UTF-8");
         int nSA = 0;

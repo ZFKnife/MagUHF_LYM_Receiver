@@ -41,6 +41,10 @@ public class ReceiverWriteActivity extends Activity implements IReceiverWriteVie
 
     private Button btn_receiverWritting;
 
+    private Button btnPrinter;
+    private Button btnZouzhi;
+
+
     private ImageView imageView;
 
 
@@ -98,6 +102,9 @@ public class ReceiverWriteActivity extends Activity implements IReceiverWriteVie
 
         linearLayout = (LinearLayout) findViewById(R.id.reveiver_linear);
 
+        btnPrinter = (Button) findViewById(R.id.btn_printer);
+        btnZouzhi = (Button) findViewById(R.id.btn_zouzhi);
+
     }
 
 
@@ -118,6 +125,18 @@ public class ReceiverWriteActivity extends Activity implements IReceiverWriteVie
             @Override
             public void onClick(View v) {
                 presenter.writeReveiver();
+            }
+        });
+        btnPrinter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.printe();
+            }
+        });
+        btnZouzhi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.Step();
             }
         });
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -200,6 +219,12 @@ public class ReceiverWriteActivity extends Activity implements IReceiverWriteVie
     @Override
     public void setReceiverJingText(String str) {
         tv_jingZhong.setText(str);
+    }
+
+    @Override
+    public void setVisite(boolean b) {
+        btnPrinter.setEnabled(b);
+        btnPrinter.setClickable(b);
     }
 
     @Override

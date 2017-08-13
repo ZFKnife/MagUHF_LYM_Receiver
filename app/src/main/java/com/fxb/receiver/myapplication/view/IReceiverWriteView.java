@@ -75,5 +75,7 @@ public interface IReceiverWriteView extends IUHFViewBase {
      */
     public void setReceiverJingText(String str);
 
+    public void setVisite(boolean b);
+
 
 }
