@@ -306,13 +306,14 @@ public class ReceiverWritePresenter extends Presenter {
                         oradid = jo.getString("ordered");
                         cargo = jo.getString("name");
                         iReceiverView.setVisite(true);
-
+                        imageBitmap = iReceiverView.getBitmap();
                         if (imageBitmap != null) {
                             new Thread(new Runnable() {
                                 @Override
                                 public void run() {
                                     //上传发货方图片
-                                    uploadReceiverServer(RequestConfig.uploadReceiverurl, carnum, getBitmapPath(), imageBitmap, sb);
+                                    Log.i(" ------ ", "run:  start ");
+                                    uploadReceiverServer(RequestConfig.uploadReceiverurl, oradid, getBitmapPath(), imageBitmap, sb);
                                 }
                             }).start();
                         } else {
@@ -343,19 +344,19 @@ public class ReceiverWritePresenter extends Presenter {
      * @return
      */
     private String getBitmapPath() {
-        return "shipper" + System.currentTimeMillis() + ".jpg";
+        return "receiver.jpg";
     }
 
     /**
      * 上传图片
      *
      * @param targetUrl
-     * @param carnum
+     * @param ORDERNUM
      * @param fileName
      * @param bm
      * @return
      */
-    private boolean uploadReceiverServer(String targetUrl, String carnum, String fileName, Bitmap bm, String sb) {
+    private boolean uploadReceiverServer(String targetUrl, String ORDERNUM, String fileName, Bitmap bm, String sb) {
         String end = "\r\n";
         String twoHyphens = "--";
         String boundary = "******";
@@ -378,16 +379,16 @@ public class ReceiverWritePresenter extends Presenter {
 
             DataOutputStream dos = new DataOutputStream(httpURLConnection.getOutputStream());
             dos.writeBytes(twoHyphens + boundary + end);
-            dos.writeBytes("Content-Disposition: form-data; name=\"CARNUM\"" + end);
+            dos.writeBytes("Content-Disposition: form-data; name=\"ORDERNUM\"" + end);
             dos.writeBytes(end);
-            dos.writeBytes(carnum + end);
+            dos.writeBytes(ORDERNUM + end);
 
             dos.writeBytes(twoHyphens + boundary + end);
             dos.writeBytes("Content-Disposition: form-data; name=\"imagePath\"; filename=\"" + fileName + "\"" + end);
             dos.writeBytes(end);
-
             dos.write(Util.Bitmap2Bytes(bm));
             dos.writeBytes(end);
+
             dos.writeBytes(twoHyphens + boundary + twoHyphens + end);
             dos.flush();
 

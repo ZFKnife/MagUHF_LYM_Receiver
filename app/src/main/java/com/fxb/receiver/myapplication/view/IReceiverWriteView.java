@@ -1,5 +1,6 @@
 package com.fxb.receiver.myapplication.view;
 
+import android.graphics.Bitmap;
 import android.widget.LinearLayout;
 
 /**
@@ -76,6 +77,8 @@ public interface IReceiverWriteView extends IUHFViewBase {
     public void setReceiverJingText(String str);
 
     public void setVisite(boolean b);
+
+    public Bitmap getBitmap();
 
 
 }

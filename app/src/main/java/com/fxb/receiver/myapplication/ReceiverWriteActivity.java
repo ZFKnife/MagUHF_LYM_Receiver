@@ -24,6 +24,7 @@ import com.fxb.receiver.myapplication.view.IReceiverWriteView;
 
 public class ReceiverWriteActivity extends Activity implements IReceiverWriteView {
 
+
     private TextView tv_receiverEpc;
     private TextView tv_receiverCarNum;
     private TextView tv_shipperMao;
@@ -52,6 +53,7 @@ public class ReceiverWriteActivity extends Activity implements IReceiverWriteVie
 
 
     private ReceiverWritePresenter presenter = null;
+    private Bitmap imageBitmap;
 
 
     @Override
@@ -74,7 +76,7 @@ public class ReceiverWriteActivity extends Activity implements IReceiverWriteVie
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             Bundle bundle = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) bundle.get("data");
+            imageBitmap = (Bitmap) bundle.get("data");
             assert imageBitmap != null;
             imageView.setBackgroundColor(Color.parseColor("#FFFFFF"));
             imageView.setImageBitmap(imageBitmap);
@@ -225,6 +227,14 @@ public class ReceiverWriteActivity extends Activity implements IReceiverWriteVie
     public void setVisite(boolean b) {
         btnPrinter.setEnabled(b);
         btnPrinter.setClickable(b);
+    }
+
+    @Override
+    public Bitmap getBitmap() {
+        if (imageBitmap == null) {
+            return null;
+        }
+        return imageBitmap;
     }
 
     @Override

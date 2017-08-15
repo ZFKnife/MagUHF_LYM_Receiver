@@ -18,7 +18,7 @@ public class RequestConfig {
 
     public static String getRealordReceiver = base + "appPublishInformation?action=getRealordReceiver&";
 
-    public static String uploadReceiverurl = base + "appUser/uploadReceiptorder";
+    public static String uploadReceiverurl = base + "appUser?action=uploadReceiptorder";
 
     public static String getReceiverList = base + "appPublishInformation?action=getReceiverList";
 
