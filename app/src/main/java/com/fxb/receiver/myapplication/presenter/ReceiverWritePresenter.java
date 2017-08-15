@@ -246,29 +246,32 @@ public class ReceiverWritePresenter extends Presenter {
     * 上传数据
     * */
     private void uploadMeasData(final String maoWeight, final String piWeight, String jingWeight, final String sb) {
-        int c = CheckBoxs.size();
         final JSONArray ja = new JSONArray();
-        for (int i = 0; i < c; i++) {
-            String incidental = URLEncoder.encode(incidentals.get(i).getIncidental());
-            JSONObject jo = new JSONObject();
-            if (CheckBoxs.get(i).isChecked()) {
-                try {
-                    String money = EditTexts.get(i).getText().toString().trim();
-                    jo.put("incidental", incidental);
-                    jo.put("money", money);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+        if (CheckBoxs.size() > 1) {
+            int c = CheckBoxs.size();
+            for (int i = 0; i < c; i++) {
+                String incidental = URLEncoder.encode(incidentals.get(i).getIncidental());
+                JSONObject jo = new JSONObject();
+                if (CheckBoxs.get(i).isChecked()) {
+                    try {
+                        String money = EditTexts.get(i).getText().toString().trim();
+                        jo.put("incidental", incidental);
+                        jo.put("money", money);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        jo.put("incidental", incidental);
+                        jo.put("money", "0");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
-            } else {
-                try {
-                    jo.put("incidental", incidental);
-                    jo.put("money", "0");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                ja.put(jo);
             }
-            ja.put(jo);
         }
+
 
             /*
             * 参数说明
@@ -305,7 +308,9 @@ public class ReceiverWritePresenter extends Presenter {
                         JSONObject jo = new JSONObject(String.valueOf(ja.getJSONObject(0)));
                         oradid = jo.getString("ordered");
                         cargo = jo.getString("name");
+
                         iReceiverView.setVisite(true);
+
                         imageBitmap = iReceiverView.getBitmap();
                         if (imageBitmap != null) {
                             new Thread(new Runnable() {

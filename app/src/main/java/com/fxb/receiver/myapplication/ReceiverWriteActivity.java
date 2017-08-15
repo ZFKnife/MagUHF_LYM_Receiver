@@ -226,7 +226,6 @@ public class ReceiverWriteActivity extends Activity implements IReceiverWriteVie
     @Override
     public void setVisite(boolean b) {
         btnPrinter.setEnabled(b);
-        btnPrinter.setClickable(b);
     }
 
     @Override
@@ -240,6 +239,12 @@ public class ReceiverWriteActivity extends Activity implements IReceiverWriteVie
     @Override
     protected void onPause() {
         super.onPause();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
         presenter.cancel();
     }
 }
