@@ -42,6 +42,10 @@ public class ReceiverWriteActivity extends Activity implements IReceiverWriteVie
 
     private Button btn_receiverWritting;
 
+    private TextView tvShipper;
+    private TextView tvShipperCargo;
+
+
     private Button btnPrinter;
     private Button btnZouzhi;
 
@@ -90,6 +94,8 @@ public class ReceiverWriteActivity extends Activity implements IReceiverWriteVie
         tv_shipperMao = (TextView) findViewById(R.id.tv_shipper_famao);
         tv_shipperPi = (TextView) findViewById(R.id.tv_shipper_fapi);
         tv_shipperJing = (TextView) findViewById(R.id.tv_shipper_fajing);
+        tvShipper = (TextView) findViewById(R.id.tv_shipper);
+        tvShipperCargo = (TextView) findViewById(R.id.tv_shipper_cargo);
 
         et_maoZhong = (EditText) findViewById(R.id.et_maozhong);
         et_piZhong = (EditText) findViewById(R.id.et_pizhong);
@@ -237,9 +243,18 @@ public class ReceiverWriteActivity extends Activity implements IReceiverWriteVie
     }
 
     @Override
+    public void setShipper(String str) {
+        tvShipper.setText(str);
+    }
+
+    @Override
+    public void setCargo(String str) {
+        tvShipperCargo.setText(str);
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
-
     }
 
     @Override

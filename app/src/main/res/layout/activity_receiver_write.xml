@@ -72,55 +72,105 @@
                 android:layout_below="@+id/linearLayout"
                 android:layout_gravity="center"
                 android:layout_marginTop="11dp"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <TextView
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="发货方："
+                        android:textColor="@color/red"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/tv_shipper"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/red"
+                        android:textSize="18dp" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="毛重："
-                    android:textColor="@color/red"
-                    android:textSize="16dp" />
+                    android:layout_marginTop="11dp">
 
-                <TextView
-                    android:id="@+id/tv_shipper_famao"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="货物："
+                        android:textColor="@color/red"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/tv_shipper_cargo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/red"
+                        android:textSize="18dp" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="@color/red"
-                    android:textSize="18dp" />
+                    android:layout_marginTop="11dp"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="皮重："
-                    android:textColor="@color/red"
-                    android:textSize="16dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="毛重："
+                        android:textColor="@color/red"
+                        android:textSize="16dp" />
 
-                <TextView
-                    android:id="@+id/tv_shipper_fapi"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="@color/red"
-                    android:textSize="18dp" />
+                    <TextView
+                        android:id="@+id/tv_shipper_famao"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/red"
+                        android:textSize="18dp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="净重："
-                    android:textColor="@color/red"
-                    android:textSize="16dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="皮重："
+                        android:textColor="@color/red"
+                        android:textSize="16dp" />
 
-                <TextView
-                    android:id="@+id/tv_shipper_fajing"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="@color/red"
-                    android:textSize="18dp" />
+                    <TextView
+                        android:id="@+id/tv_shipper_fapi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/red"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="净重："
+                        android:textColor="@color/red"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/tv_shipper_fajing"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/red"
+                        android:textSize="18dp" />
+                </LinearLayout>
+
+
             </LinearLayout>
 
             <TextView
@@ -232,7 +282,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="6dp"
                     android:layout_weight="1"
-                    android:background="@drawable/ic_crop_original_black_48dp"/>
+                    android:background="@drawable/ic_crop_original_black_48dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -290,8 +340,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:background="@color/bg"
         android:layout_alignParentStart="true"
+        android:background="@color/bg"
         android:orientation="vertical">
 
         <Button
@@ -299,8 +349,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textColor="@color/white"
             android:text="读取EPC"
+            android:textColor="@color/white"
             android:textSize="18dp" />
 
         <LinearLayout
@@ -314,8 +364,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/white"
                 android:text="读标签"
+                android:textColor="@color/white"
                 android:textSize="18dp" />
 
             <Button
@@ -324,10 +374,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/white"
                 android:text="保存"
+                android:textColor="@color/white"
                 android:textSize="18dp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -339,8 +390,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/white"
                 android:text="打印发票"
+                android:textColor="@color/white"
                 android:textSize="18dp" />
 
             <Button
@@ -349,8 +400,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/white"
                 android:text="走纸"
+                android:textColor="@color/white"
                 android:textSize="18dp" />
         </LinearLayout>
     </LinearLayout>

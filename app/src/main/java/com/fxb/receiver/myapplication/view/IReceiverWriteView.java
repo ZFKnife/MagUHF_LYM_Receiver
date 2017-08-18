@@ -66,19 +66,40 @@ public interface IReceiverWriteView extends IUHFViewBase {
 
     /**
      * 显示发货皮重
+     *
      * @param str
      */
     public void setShipperPiText(String str);
 
     /**
      * 显示收货净重
+     *
      * @param str
      */
     public void setReceiverJingText(String str);
 
+    /**
+     * 开关打印功能
+     *
+     * @param b
+     */
     public void setVisite(boolean b);
 
+    /**
+     * 获取图片
+     *
+     * @return
+     */
     public Bitmap getBitmap();
 
+    /**
+     * 显示发货方
+     */
+    public void setShipper(String str);
+
+    /**
+     * 显示货物名
+     */
+    public void setCargo(String str);
 
 }

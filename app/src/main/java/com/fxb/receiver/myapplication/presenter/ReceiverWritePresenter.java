@@ -137,20 +137,19 @@ public class ReceiverWritePresenter extends Presenter {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        int length = strings.length - 1;
-        int msc = -1;
+        int length = strings.length;
         if (length > 5) {
-            msc = Integer.parseInt(strings[length]);
+            iReceiverView.setShipper(strings[2]);
+            iReceiverView.setCargo(strings[3]);
+            iReceiverView.setShipperMaoText(strings[4]);
+            iReceiverView.setShipperPiText(strings[5]);
+            iReceiverView.setShipperJingText(String.valueOf(Double.valueOf(strings[4])-Double.valueOf(strings[5])));
         }
-        if (str.substring(18, 19).equals("0")) {
+        if (length > 6) {
+            iReceiverView.setResult(str.replace(strings[6], ""));
+        } else if (str.substring(18, 19).equals("0")) {
             iReceiverView.showToast("没有发货方写入数据");
-            iReceiverView.finash();
             return;
-        } else if (msc == 0) {
-            iReceiverView.setShipperMaoText(strings[2]);
-            iReceiverView.setShipperPiText(strings[3]);
-            iReceiverView.setShipperJingText(strings[4]);
-            iReceiverView.setResult(str.replace(strings[length], ""));
         } else {
             iReceiverView.setResult(str);
         }
